@@ -1,4 +1,4 @@
-"start": "node index.js"
+"start": "node index.js";
 
 {
   "name": "messenger-webhook",
