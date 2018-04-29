@@ -37,6 +37,11 @@ app.post('/webhook', (req, res) => {
   }
 });
 
+// Server index page -- to know if the app has been successfully deployed
+app.get("/", function (req, res) {
+  res.send("Deployed!");
+});
+
 // Webhook Verification - Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
 
