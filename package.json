@@ -1,3 +1,5 @@
+"start": "node index.js"
+
 {
   "name": "messenger-webhook",
   "version": "1.0.0",
