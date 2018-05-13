@@ -52,8 +52,8 @@ body.entry.forEach(function(entry) {
 
 
 // Webhook Verification - Adds support for GET requests to our webhook
-app.get('/webhook', (req, res) => {
-
+app.get('/', (req, res) => {
+res.redirect('/webhook');
   // Your verify token. Should be a random string.
   let VERIFY_TOKEN = "CHALLENGE_ACCEPTED"
 
