@@ -1,5 +1,7 @@
 'use strict';
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
 // Imports dependencies and set up http server
 const
   express = require('express'),
@@ -15,6 +17,7 @@ app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 // Creates the endpoint for our webhook
 app.post('/webhook', (req, res) => {
 
+  // Parse the request body from the POST
   let body = req.body;
 
   // Checks this is an event from a page subscription
@@ -23,7 +26,7 @@ app.post('/webhook', (req, res) => {
     // Iterates over each entry - there may be multiple if batched
     body.entry.forEach(function(entry) {
 
-      // Gets the message. entry.messaging is an array, but
+      // Gets the webhook event (message). entry.messaging is an array, but
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
@@ -37,6 +40,20 @@ app.post('/webhook', (req, res) => {
   }
 });
 
+// To get the sender's PSID, update the body.entry.forEach
+//block with the following code to extract the PSID
+// from the sender.id property of the event:
+body.entry.forEach(function(entry) {
+
+  // Gets the body of the webhook event
+  let webhook_event = entry.messaging[0];
+  console.log(webhook_event);
+
+  // Get the sender PSID
+  let sender_psid = webhook_event.sender.id;
+  console.log('Sender PSID: ' + sender_psid);
+
+});
 
 // Webhook Verification - Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
@@ -65,3 +82,21 @@ app.get('/webhook', (req, res) => {
     }
   }
 });
+
+
+// Stub out handler functions
+
+// Handles messages events
+function handleMessage(sender_psid, received_message) {
+
+}
+
+// Handles messaging_postbacks events
+function handlePostback(sender_psid, received_postback) {
+
+}
+
+// Sends response messages via the Send API
+function callSendAPI(sender_psid, response) {
+
+}
