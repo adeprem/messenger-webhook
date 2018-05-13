@@ -24,21 +24,6 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
 
     // Iterates over each entry - there may be multiple if batched
-    body.entry.forEach(function(entry) {
-
-      // Gets the webhook event (message). entry.messaging is an array, but
-      // will only ever contain one message, so we get index 0
-      let webhook_event = entry.messaging[0];
-      console.log(webhook_event);
-    });
-
-    // Returns a '200 OK' response to all requests
-    res.status(200).send('EVENT_RECEIVED');
-  } else {
-    // Returns a '404 Not Found' if event is not from a page subscription
-    res.sendStatus(404);
-  }
-});
 
 // To get the sender's PSID, update the body.entry.forEach
 //block with the following code to extract the PSID
@@ -54,6 +39,16 @@ body.entry.forEach(function(entry) {
   console.log('Sender PSID: ' + sender_psid);
 
 });
+
+
+    // Returns a '200 OK' response to all requests
+    res.status(200).send('EVENT_RECEIVED');
+  } else {
+    // Returns a '404 Not Found' if event is not from a page subscription
+    res.sendStatus(404);
+  }
+});
+
 
 // Webhook Verification - Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
