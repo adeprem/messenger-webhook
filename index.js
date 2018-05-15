@@ -1,22 +1,23 @@
 
+'use strict';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 // Imports dependencies and set up http server
 
-  const request = require('request')
-  const express = require('express')
-  const bodyParser = require('body-parser')
-  const app = express()
-  const Cosmic = require('cosmicjs')
-  const BootBot = require('bootbot')
-  require('dotenv').config()
-  const chrono = require('chrono-node')
-  const EventEmitter = require('events').EventEmitter
+  const request = require('request');
+  const express = require('express');
+  const bodyParser = require('body-parser');
+  const app = express();
+  const Cosmic = require('cosmicjs');
+  const BootBot = require('bootbot');
+  require('dotenv').config();
+  const chrono = require('chrono-node');
+  const EventEmitter = require('events').EventEmitter;
 
 
-var config = {}
-const reminders = []
-const eventEmitter = new EventEmitter()
+var config = {};
+const reminders = [];
+const eventEmitter = new EventEmitter();
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json()); // creates express http server
