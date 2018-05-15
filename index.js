@@ -13,12 +13,14 @@ var
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
+// Index route
+app.get('/', function (req, res) {
+  res.send('Hello world, I am a chat bot')
+})
+
 
 // Webhook Verification - Adds support for GET requests to our webhook
-app.get('/', (req, res) => {
-  //res.render('/webhook')
-  res.render('hello world i am a secret bo')
-
+app.get('/webhook', (req, res) => {
   // Your verify token. Should be a random string.
   let VERIFY_TOKEN = "CHALLENGE_ACCEPTED"
 
