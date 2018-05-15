@@ -7,7 +7,9 @@ const
   request = require('request'),
   express = require('express'),
   bodyParser = require('body-parser'),
-  app = express().use(bodyParser.json()); // creates express http server
+  app = express()
+
+app.use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
@@ -32,7 +34,7 @@ app.post('/webhook', (req, res) => {
 // To get the sender's PSID, update the body.entry.forEach
 //block with the following code to extract the PSID
 // from the sender.id property of the event:
-body.entry.forEach(function(entry) {
+  body.entry.forEach(function(entry) {
 
   // Gets the body of the webhook event
   let webhook_event = entry.messaging[0];
