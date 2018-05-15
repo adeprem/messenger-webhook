@@ -1,17 +1,48 @@
 'use strict';
 
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-const request = require('request');
+var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+var request = require('request');
 
 // Imports dependencies and set up http server
-const
+var
   express = require('express'),
   bodyParser = require('body-parser'),
-  app = express().use(bodyParser.json()); // creates express http server
+  app = express()
+  app.use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
+
+// Webhook Verification - Adds support for GET requests to our webhook
+app.get('/', (req, res) => {
+  //res.render('/webhook')
+  res.render('hello world i am a secret bo')
+
+  // Your verify token. Should be a random string.
+  let VERIFY_TOKEN = "CHALLENGE_ACCEPTED"
+
+  // Parse the query params
+  let mode = req.query['hub.mode'];
+  let token = req.query['hub.verify_token'];
+  let challenge = req.query['hub.challenge'];
+
+  // Checks if a token and mode is in the query string of the request
+  if (mode && token) {
+
+    // Checks the mode and token sent is correct
+    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+
+      // Responds with the challenge token from the request
+      console.log('WEBHOOK_VERIFIED');
+      res.status(200).send(challenge);
+
+    } else {
+      // Responds with '403 Forbidden' if verify tokens do not match
+      res.sendStatus(403);
+    }
+  }
+});
 
 
 
@@ -47,35 +78,6 @@ body.entry.forEach(function(entry) {
   } else {
     // Returns a '404 Not Found' if event is not from a page subscription
     res.sendStatus(404);
-  }
-});
-
-
-// Webhook Verification - Adds support for GET requests to our webhook
-app.get('/webhook', (req, res) => {
-
-  // Your verify token. Should be a random string.
-  let VERIFY_TOKEN = "CHALLENGE_ACCEPTED"
-
-  // Parse the query params
-  let mode = req.query['hub.mode'];
-  let token = req.query['hub.verify_token'];
-  let challenge = req.query['hub.challenge'];
-
-  // Checks if a token and mode is in the query string of the request
-  if (mode && token) {
-
-    // Checks the mode and token sent is correct
-    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-
-      // Responds with the challenge token from the request
-      console.log('WEBHOOK_VERIFIED');
-      res.status(200).send(challenge);
-
-    } else {
-      // Responds with '403 Forbidden' if verify tokens do not match
-      res.sendStatus(403);
-    }
   }
 });
 
