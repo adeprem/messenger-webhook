@@ -32,6 +32,7 @@ app.get('/', function (req, res) {
 
 
 app.get('/webhook/', function(req, res) {
+  const VERIFY_TOKEN = "CHALLENGE_ACCEPTED";
   if (req.query['hub.verify_token'] === process.env.VERIFY_TOKEN){
     return res.send(req.query['hub.challenge'])
   }
