@@ -43,7 +43,7 @@ app.listen(app.get('port'), function(){
 
 
 const bot = new BootBot({
-  accessToken: process.env.ACCESS_TOKEN,
+  accessToken: process.env.PAGE_ACCESS_TOKEN,
   verifyToken: process.env.VERIFY_TOKEN,
   appSecret: process.env.APP_SECRET
 })
