@@ -3,13 +3,13 @@
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 // Imports dependencies and set up http server
-const
-  request = require('request'),
-  express = require('express'),
-  bodyParser = require('body-parser'),
-  app = express(),
 
-  BootBot = require('bootbot')
+  const request = require('request')
+  const express = require('express')
+  const bodyParser = require('body-parser')
+  const app = express()
+  const Cosmic = require('cosmicjs')
+  const BootBot = require('bootbot')
   require('dotenv').config()
   const chrono = require('chrono-node')
   const EventEmitter = require('events').EventEmitter
