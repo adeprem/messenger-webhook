@@ -19,12 +19,11 @@ var config = {}
 const reminders = []
 const eventEmitter = new EventEmitter()
 
-app.set('port', (process.env.PORT || 5000))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json()); // creates express http server
 
 // Sets server port and logs message on success
-// app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 // Index route
 app.get('/', function (req, res) {
