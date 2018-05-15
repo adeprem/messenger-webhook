@@ -1,6 +1,7 @@
 'use strict';
 
 var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+var token = process.env.FB_PAGE_ACCESS_TOKEN
 var request = require('request');
 
 // Imports dependencies and set up http server
